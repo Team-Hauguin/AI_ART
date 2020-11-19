@@ -6,7 +6,7 @@
 
 ## 참고 내용
 # 1) Meta Learning 
-![screenshot](./img/meta_learning.png)
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/meta_learning.PNG" width="90%"></img>
 # 2) Content Loss
 
 # 3) Adversarial Loss
