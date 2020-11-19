@@ -6,7 +6,7 @@
 
 ## 참고 내용
 # 1) Meta Learning 
-![ex_screenshot](./img/screenshot.png)
+![screenshot](./img/meta_learning.png)
 # 2) Content Loss
 
 # 3) Adversarial Loss
