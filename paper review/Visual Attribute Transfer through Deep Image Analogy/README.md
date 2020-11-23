@@ -7,15 +7,19 @@
 하나의 이미지를 다른 color, tone, texture의 style로 바꿔주는걸 말한다. 
 예를들어, 같은 scene을 묘사한경우 그림이나 스케치를 사진으로 변경하거나 반대 경우 모두를 포함한다
 
-
 # Motivation
-
 ### 1) Analogy with Bidirectional Constraints
+![KakaoTalk_20201123_234308040](https://user-images.githubusercontent.com/74186580/99975857-10a66380-2de6-11eb-9103-c270be37ae99.jpg)
 유사한 appearance를 갖고 있거나, 구조적으로 동일한 위치에 있는 양방향의 제약조건을 가진 analogy를 확인할 수 있다. 
 
 ### 2) Reconstruction using CNN
+![KakaoTalk_20201123_234412842](https://user-images.githubusercontent.com/74186580/99976039-4b100080-2de6-11eb-9120-eea55d8b93ca.jpg)
+Coarsest layer에서는(image 상에서 relu5_1)에서 A와 B'은 구조적으로 매우 유사하게 된다. 
+이에 따라 해당 Layer에서는 A'=A라고 가정을 하게 된다.
+그 이후 Layer에서는 A에서 conyeny structure를 B'에서 detail information을 이전 layer에서 갖고 와서 다음 layer에서 이용 하게 된다. 
 
 ### 3) Deep Patchmatch
+
 
 # Deep Image Analogy
 
@@ -31,5 +35,9 @@ Input 이미지는 A와 B'으로 imagenet으로 pretrained 된 VGG19를 통과�
 > A'(5) = A(5) , B(5) = B'(5)
 
 ### 3) Nearest-Neighbor Field Search
+![KakaoTalk_20201124_000020570](https://user-images.githubusercontent.com/74186580/99977794-7398fa00-2de8-11eb-9452-63863487d9ef.jpg)
+
 
 ### 4) Latent Image Recontruction 
+![KakaoTalk_20201124_000122613](https://user-images.githubusercontent.com/74186580/99977635-3f253e00-2de8-11eb-9ed3-5b95312b9936.jpg)
+
