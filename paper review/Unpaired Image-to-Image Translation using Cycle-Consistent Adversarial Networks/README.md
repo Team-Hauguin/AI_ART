@@ -25,5 +25,5 @@
 
 # 4) Results 
 
-![image](https://user-images.githubusercontent.com/62173633/100192244-eca56800-2f34-11eb-84b2-8125a4aacb2d.png)
+![image](https://user-images.githubusercontent.com/62173633/100192300-0d6dbd80-2f35-11eb-90cf-a6d7ef8929f3.png)
 
