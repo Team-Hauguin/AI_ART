@@ -28,6 +28,11 @@ BN레이어는 원래 discriminative networks의 학습을 가속화 하기 위�
 
 BN은 주어진 batch x에 대해 각각의 feature channel의 평균과 분산을 정규화합니다. 
 
+
+computed across batch size and spatial dimensions independently for each feature channel
+
+
+
 ### Instance Normalization
 ### Conditional Instance Normalization
 
