@@ -17,6 +17,8 @@ Content Image의 Feature Map P, Generated Image의 Feature Map X에 대하여 Ge
 
 <img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Content Loss.PNG" width="30%"></img>
 
+본 논문에서는 Identity Encoder를 통과한 Embedding을 Content로 사용한다.
+
 ## 3) Adversarial Loss
 Adversarail Loss란 Generative Adversarial Nets에서 소개된 Loss로, Generator는 Discriminator의 손실을 최대화하고, Discrimiinator는 자신의 손실을 최소화하게 설계된 Loss이다.
 Generator를 훈련시킬 때는 오른쪽 항만 학습에 관여하고, Discriminator를 훈련시킬 때는 두 항 모두 관여한다.
@@ -29,9 +31,18 @@ Logg(Discriminator) = log(D(x)) - log(1-D(G(z)))
 </img>
 
 ## 4) Dice Coefficient Loss
+Dice Coefficient Loss란 Image Segmentation 성능을 평가하는 Loss로, 두 대상 segmentation 영역 중 겹치는 영역을 각 영역의 합으로 나누는 Loss이며 다음과 같이 정의한다.
+
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Dice_Loss.PNG" width="90%">
+</img>
 
 ## 5) Landmark
 
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Facial_Landmark.PNG" width="90%">
+</img>
+
+Landmark(=Facial Landmark)란 위 그림처럼 눈썹, 코, 입술과 같이 사람이라면 누구나 가지는 얼굴의 특징점을 의미한다.
+하지만 Landmark Detection 학습을 위해서는 많은 양의 Annotation이 필요하고 눈동자의 방향 등을 추출하기 어려운 문제가 있어, Pose Encoder를 제안하여 이 문제를 해결한다.
 
 # Method
 ## 전체구조
