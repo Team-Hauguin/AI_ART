@@ -9,6 +9,8 @@ Justin Johnson, Alexandre Alahi, Li Fei-Fei, ArXiv, 2016년
   - Perceptual loss functions : ImageNet과 같은 데이터셋으로 사전 훈련된 Convolution Neural Network로 두 이미지를 비교
 
 ## Method
+![이미지 001](https://user-images.githubusercontent.com/13701781/100173895-c371e100-2f0e-11eb-9db1-342eab137b6a.png)
+
 - Image Transform Network
   - Deep residual convolutional neural network
   - Residual blocks와 stride로 Downsampling과 Upsampling을 수행
