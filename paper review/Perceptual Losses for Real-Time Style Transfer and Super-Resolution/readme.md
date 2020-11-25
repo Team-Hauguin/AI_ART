@@ -29,7 +29,9 @@ Justin Johnson, Alexandre Alahi, Li Fei-Fei, ArXiv, 2016년
 
 ## Result
 - Style Transfer
+
   ![이미지04](https://user-images.githubusercontent.com/13701781/100181197-118de100-2f1d-11eb-9684-904e49938188.png)
 
 - Super Resolution
+
   ![이미지05](https://user-images.githubusercontent.com/13701781/100181194-10f54a80-2f1d-11eb-84ef-e6dc40e7d128.png)
