@@ -33,7 +33,7 @@ Logg(Discriminator) = log(D(x)) - log(1-D(G(z)))
 ## 4) Dice Coefficient Loss
 Dice Coefficient Loss란 Image Segmentation 성능을 평가하는 Loss로, 두 대상 segmentation 영역 중 겹치는 영역을 각 영역의 합으로 나누는 Loss이며 다음과 같이 정의한다.
 
-<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Dice_Loss.PNG" width="90%">
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Dice_Loss.PNG" width="30%">
 </img>
 
 ## 5) Landmark
