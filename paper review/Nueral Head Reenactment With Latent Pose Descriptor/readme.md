@@ -27,6 +27,7 @@ Logg(Discriminator) = log(D(x)) - log(1-D(G(z)))
 
 <img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Adversarial_Loss.PNG" width="90%">
 </img>
+
 ## 4) Dice Coefficient Loss
 
 ## 5) Landmark
