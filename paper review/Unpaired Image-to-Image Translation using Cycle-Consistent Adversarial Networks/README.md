@@ -6,7 +6,7 @@
 
 # 1) Introduction  
 
-![image](https://user-images.githubusercontent.com/62173633/100191468-82d88e80-2f33-11eb-874c-7a8fb44deb77.png)
+![image](https://user-images.githubusercontent.com/62173633/100192575-94229a80-2f35-11eb-9c6e-ac0fa01a55a5.png)
 
 
 # 2) Formulation 
