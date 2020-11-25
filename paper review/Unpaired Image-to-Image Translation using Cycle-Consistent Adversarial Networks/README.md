@@ -11,7 +11,7 @@
 
 # 2) Formulation 
 
-![image](https://user-images.githubusercontent.com/62173633/100191293-368d4e80-2f33-11eb-9eb8-0faa9d97f685.png)
+![image](https://user-images.githubusercontent.com/62173633/100192458-5887d080-2f35-11eb-9fd0-53e6b74a4243.png)
 
 ![image](https://user-images.githubusercontent.com/62173633/100191490-8cfa8d00-2f33-11eb-8be6-fd1fef1210e5.png)
 
@@ -25,5 +25,6 @@
 
 # 4) Results 
 
-![image](https://user-images.githubusercontent.com/62173633/100192300-0d6dbd80-2f35-11eb-90cf-a6d7ef8929f3.png)
+![image](https://user-images.githubusercontent.com/62173633/100192472-60e00b80-2f35-11eb-9c3e-91edddd9b284.png)
+
 
