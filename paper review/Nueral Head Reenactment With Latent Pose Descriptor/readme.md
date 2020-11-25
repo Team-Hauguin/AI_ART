@@ -38,7 +38,7 @@ Dice Coefficient Loss란 Image Segmentation 성능을 평가하는 Loss로, 두 
 
 ## 5) Landmark
 
-<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Facial_Landmark.png" width="90%">
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Facial_Landmark.png" width="30%">
 </img>
 
 Landmark(=Facial Landmark)란 위 그림처럼 눈썹, 코, 입술과 같이 사람이라면 누구나 가지는 얼굴의 특징점을 의미한다.
