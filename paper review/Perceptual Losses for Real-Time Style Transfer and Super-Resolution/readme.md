@@ -19,11 +19,11 @@ Justin Johnson, Alexandre Alahi, Li Fei-Fei, ArXiv, 2016년
 - Loss Network(Φ)
   - ImageNet Dataset으로 Pretrain된 VGG-16 Network
   - Feature reconstruction loss
+    - 출력 이미지(ŷ)와 레이어 'relu3_3'를 Euclidean distance로 계산
   ![이미지03](https://user-images.githubusercontent.com/13701781/100180093-d12d6380-2f1a-11eb-802d-bfc6f8fd0824.png)
-    - 출력 이미지(ŷ)와 레이어 'relu3_3'를 Euclidean distance로 계산 
   - Style reconstruction loss
-  ![이미지04](https://user-images.githubusercontent.com/13701781/100180096-d4285400-2f1a-11eb-9017-da26ceaab271.png)
     - 출력 이미지(ŷ)와 레이어 'relu1_2','relu2_2','relu3_3','relu4_3'를 Gram matrices의 Frobenius norm으로 계산
+  ![이미지04](https://user-images.githubusercontent.com/13701781/100180096-d4285400-2f1a-11eb-9017-da26ceaab271.png)
   - Total reconstruction loss
     - Feature reconstruction loss + Style reconstruction loss + Total variation regularization(for denosing)
 
