@@ -11,9 +11,19 @@
 Meta-Learning이란, 학습하려는 데이터와 유사한 도메인의 데이터를 통해 대부분의 특징을 학습한 후 학습하려는 데이터를 가지고 Adaptive Process를 진행하여 학습을 완료하는 것을 뜻한다. 새로운 Task나 enviroment에 대해서 학습에 활용할 수 있는 데이터가 부족할 때 활용도가 높다.
 
 # 2) Content Loss
+Content Loss란 A Neural Algorithm of Artistic Style에서 소개된 Loss로, Generated Image와 Content Image의 유사성을 높이는 역할을 한다.
+Content Image의 Feature Map P, Generated Image의 Feature Map X에 대하여 Generator의 Layer마다 MSE를 구한 것으로, 다음과 같이 정의한다.
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Content Loss.PNG" width="30%"></img>
 
 # 3) Adversarial Loss
+Adversarail Loss란 Generative Adversarial Nets에서 소개된 Loss로, Generator는 Discriminator의 손실을 최대화하고, Discrimiinator는 자신의 손실을 최소화하게 설계된 Loss이다.
+Generator를 훈련시킬 때는 오른쪽 항만 학습에 관여하고, Discriminator를 훈련시킬 때는 두 항 모두 관여한다.
+Real Image x, Fake Image G(z)라고 할 때 아래와 같이 정의한다.
 
+Loss(Generator) = log(1-D(G(z)))
+Logg(Discriminator) = log(D(x)) - log(1-D(G(z))) 
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/1.PNG" width="90%">
+</img>
 # 4) Dice Coefficient Loss
 
 # 5) Landmark
@@ -21,7 +31,8 @@ Meta-Learning이란, 학습하려는 데이터와 유사한 도메인의 데이�
 
 ## Network 구조
 # 전체구조
-<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/1.PNG" width="90%"></img>
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/1.PNG" width="90%">
+</img>
 
 # 1) Identity encoder
 
