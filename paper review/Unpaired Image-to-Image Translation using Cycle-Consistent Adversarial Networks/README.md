@@ -8,12 +8,12 @@
 
 
 # 2) Formulation 
-###- Adversarial Loss 
-###- Cycle Consistency Loss 
-###- Full Objective 
+###-Adversarial Loss 
+###-Cycle Consistency Loss 
+###-Full Objective 
 
 # 3) Implementation 
-###- Network Architecture 
+###-Network Architecture 
 
 # 4) Results 
 
