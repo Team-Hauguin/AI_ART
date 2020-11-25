@@ -20,6 +20,12 @@ AdaIN 레이어는 Content feature의 평균과 분산을 Style feature의 평�
 IN을 약간 변형한 AdaIN을 소개합니다. AdaIN은 단순히 Content input의 평균과 분산을 Style input의 평균과 분산으로 맞추도록 조절합니다.
 실험을 통해서 AdaIN이 효과적으로 병합하는 것을 확인하였습니다. 
 
+### Batch Normalization
+
+### Instance Normalization
+### Conditional Instance Normalization
+
+
 
 ## Interpreting Instance Normalization
 ## Adaptive Instance Normalization
