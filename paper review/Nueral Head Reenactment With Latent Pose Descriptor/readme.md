@@ -29,7 +29,7 @@ Logg(Discriminator) = log(D(x)) - log(1-D(G(z)))
 # 5) Landmark
 
 
-## Network 구조
+### Method
 # 전체구조
 <img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/1.PNG" width="90%">
 </img>
