@@ -9,7 +9,7 @@
 
 
 # 2) Formulation 
-
+![image](https://user-images.githubusercontent.com/62173633/100191293-368d4e80-2f33-11eb-9eb8-0faa9d97f685.png)
 
 
 ### -Adversarial Loss 
