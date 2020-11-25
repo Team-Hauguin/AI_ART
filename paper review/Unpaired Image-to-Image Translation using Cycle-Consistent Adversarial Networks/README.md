@@ -5,12 +5,17 @@
 
 
 # 1) Introduction  
-![cyclegan_img1](https://user-images.githubusercontent.com/62173633/100190872-7dc70f80-2f32-11eb-9188-f7a665f93d47.png)
+![image](https://user-images.githubusercontent.com/62173633/100191490-8cfa8d00-2f33-11eb-8be6-fd1fef1210e5.png)
+
+
+
+
 
 
 # 2) Formulation 
 ![image](https://user-images.githubusercontent.com/62173633/100191293-368d4e80-2f33-11eb-9eb8-0faa9d97f685.png)
 
+![image](https://user-images.githubusercontent.com/62173633/100191468-82d88e80-2f33-11eb-874c-7a8fb44deb77.png)
 
 ### -Adversarial Loss 
 ### -Cycle Consistency Loss 
