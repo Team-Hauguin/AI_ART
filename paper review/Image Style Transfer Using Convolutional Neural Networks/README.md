@@ -38,7 +38,7 @@ Gram maxrix를 구하는 과정인 아래 그림의 내요에 대해서 설명�
 ### 3.3 Style transfer algorithm
 지금까지 살펴본 generated image의 content 정보를 어떻게 표현할 것인지와 style 정보를 어떻게 표현할 것인지를 전체 bird view 관점에서 살펴보면 아래 그림과 같다.
 generated_image와 reference_image를 VGG-Network을 통과시킨뒤 5개의 layer에서 그 거리를 측정하여 E_l를 구하고 어떤 가중치 w_l를 곱하여 전체 Style Loss를 구한다.
-generated_image와 content_image간의 Content Loss는 네트워크의 상위에 위치한 특정 레이어에서만 거리를 측정하여 L_content를 구한다. 상위 특정 레이어에서 거리측정을 하는 이유는 CNN의 특성으로부터 기인한다. CNN의 경우는 Network의 앞단에서 점과 곡선 등의 low-level feature를 extraction하고 뒷단에서 건물의 모양이라던지 강아지의 전체 shape과 같은 high-level feature를 extraction한다고 알렺 있기 때문이다. 따라서 content_image의 건물 shape 등을 보존하려면 Network의 뒷단에서 거리측정을 해야한다.
+generated_image와 content_image간의 Content Loss는 네트워크의 상단에 위치한 특정 레이어에서만 거리를 측정하여 L_content를 구한다. 상단의 특정 레이어에서 거리측정을 하는 이유는 CNN의 특성으로부터 기인한다. CNN의 경우는 Network의 앞단에서 점과 곡선 등의 low-level feature를 extraction하고 뒷단에서 건물의 모양이라던지 강아지의 전체 shape과 같은 high-level feature를 extraction한다고 알려져 있기 때문이다. 따라서 content_image의 건물 shape 등을 보존하려면 Network의 상단에서 거리측정을 해야한다.
 ![Figure4](https://user-images.githubusercontent.com/54407983/100341770-5a7a8e00-3020-11eb-9a44-2d389828f009.jpeg)
 
 ### 3.4 Style transfer
