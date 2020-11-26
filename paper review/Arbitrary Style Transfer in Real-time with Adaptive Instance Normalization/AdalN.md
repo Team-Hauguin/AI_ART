@@ -29,12 +29,17 @@ BN은 주어진 batch x에 대해 각각의 feature channel의 평균과 분산�
 
 ### Instance Normalization
 원래의 style transfer에서는 각각의 convolutinal layer에 BN layer를 포함하고 있었으나,
-Ulyanov et al가 단순히 BN을 IN으로 바꾸는 것으로 놀라운 향상을 이끌어 냇습니다. 
+Ulyanov et al가 단순히 BN을 IN으로 바꾸는 것으로 놀라운 향상을 이끌어냇습니다. 
 
-
-
+![IN](https://user-images.githubusercontent.com/8110442/100295018-d1d20280-2fcb-11eb-8e76-1b1d7aa4c60a.png)
+![IN2](https://user-images.githubusercontent.com/8110442/100295022-d4345c80-2fcb-11eb-949c-27d391862ee7.png)
 
 ### Conditional Instance Normalization
+Dumoulin et al은 알파인 parameter인 gamma, beta를 학습하는 대신에 다른 parameter set을 학습하는 conditional instance normalization (CIN)을 제안했습니다. 
+
+
+
+
 
 
 IN을 약간 변형한 AdaIN을 소개합니다. AdaIN은 단순히 Content input의 평균과 분산을 Style input의 평균과 분산으로 맞추도록 조절합니다.
