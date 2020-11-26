@@ -8,6 +8,7 @@
 ## Introduction
 저자들은 'Neural Algorithm of Artistic Style'이라는 새로운 방법론을 논문을 통해 제시하며 이 알고리즘을 통해서 'image style transfer'를 기존의 방법들보다 더 효과적으로 수행할수 있다고 주장한다.
 'image style transfer'란 아래 그림처럼 source image(or style reference image)의 texture 정보만을 가져와서 target image(or base image)에 합성시키되 target image의 semantic content는 보존하는 것을 의미한다.
+논문의 저자들은 VGG-Netowork의 'conv1_2', 'conv2_2', 'conv3_2', 'conv4_2 그리고 'conv5_2' layer들의 정보를 사용했는데, Network의 higher layer로 갈수록 detail한 pixel 정보는 lost해가는 반면(=원래 사진이 가진 style이나 texture는 잃어 가는 반면), high-level content(=집모양과 같은 object의 shape)는 보존한다는 것을 알아냈다.
 ![Figure1](https://user-images.githubusercontent.com/54407983/100335252-1daa9900-3018-11eb-80d7-0de32b765836.jpeg)
 
 ## Deep image representations
