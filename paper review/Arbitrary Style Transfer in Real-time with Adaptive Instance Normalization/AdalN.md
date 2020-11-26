@@ -7,23 +7,21 @@
 * [Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://towardsdatascience.com/fast-and-arbitrary-style-transfer-40e29d308dd3)
 
 Gatys et al는 DNN을 통해 이미지의 content와 style feature를 추출하고,
-Arbitrary(임의)의 이미지에서 추출된 content와 style feature를 병합하는 **Style transfer**를 제시하였습니다.
-그러나 Style transfer는 연산속도가 매우 느리다는 단점이 있습니다. 
+Arbitrary(임의)의 이미지에서 추출된 style feature를 병합하는 **Style transfer**를 제시하였습니다.
+그러나 Style transfer는 **연산속도가 매우 느리다는 단점**이 있습니다. 
 
-이 논문에서는 실시간으로(그만큼 빠른) 이미지를 arbitrary style로 바꾸는 방식을 제안하고자 합니다. 
+이 논문에서는 이미지를 **실시간(그만큼 빠른)** 으로 임의의 style로 바꾸는 방식을 제안하고자 합니다. 
 이 방식의 핵심은 __adaptive instance normalization(AdaIN)__ 입니다. 
 AdaIN 레이어는 Content feature의 평균과 분산을 Style feature의 평균과 분산으로 정렬하는 기능을 갖습니다. 
 이 방식은 사전에 학습할 필요가 없고 매우 빠릅니다. 
 
 ## Background
-우리의 방식은 Feed-forward style transfer에서 매우 효과적인 Instance Normalization(IN)에서 영감을 얻었습니다.
-IN을 약간 변형한 AdaIN을 소개합니다. AdaIN은 단순히 Content input의 평균과 분산을 Style input의 평균과 분산으로 맞추도록 조절합니다.
-실험을 통해서 AdaIN이 효과적으로 병합하는 것을 확인하였습니다. 
+AdaIN은 Feed-forward style transfer에서 매우 효과적인 Instance Normalization(IN)에서 영감을 얻었습니다.
 
 ### Batch Normalization
 * [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)
 
-Ioffe and Szegedy 소개한 batch normalization(BN)은 feature의 통계량을 normalizing하여 feed-forward networks의 학습을 매우 쉽게 만들었습니다.
+Ioffe and Szegedy가 소개한 batch normalization(BN)은 feature의 통계량을 normalizing하여 feed-forward networks의 학습을 매우 쉽게 만들었습니다.
 BN레이어는 원래 discriminative networks의 학습을 가속화 하기 위해 만들어졌으나 generative image modeling에도 효과가 있다고 알려져 있습니다. 
 
 BN은 주어진 batch x에 대해 각각의 feature channel의 평균과 분산을 정규화합니다. 
@@ -35,6 +33,10 @@ computed across batch size and spatial dimensions independently for each feature
 
 ### Instance Normalization
 ### Conditional Instance Normalization
+
+
+IN을 약간 변형한 AdaIN을 소개합니다. AdaIN은 단순히 Content input의 평균과 분산을 Style input의 평균과 분산으로 맞추도록 조절합니다.
+실험을 통해서 AdaIN이 효과적으로 병합하는 것을 확인하였습니다. 
 
 
 
