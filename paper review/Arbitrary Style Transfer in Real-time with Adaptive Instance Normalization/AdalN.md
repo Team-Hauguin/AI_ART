@@ -47,6 +47,11 @@ Dumoulin et al은 알파인 parameter인 gamma, beta를 학습하는 대신에 �
 
 ## Interpreting Instance Normalization
 
+IN가 크게 성공했지만 Style transfer에 잘 작동하는 이유는 모릅니다. 
+IN의 성공은 
+ 
+
+
 IN을 약간 변형한 AdaIN을 소개합니다. AdaIN은 단순히 Content input의 평균과 분산을 Style input의 평균과 분산으로 맞추도록 조절합니다.
 실험을 통해서 AdaIN이 효과적으로 병합하는 것을 확인하였습니다. 
 
