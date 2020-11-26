@@ -29,7 +29,7 @@ feature extraction용으로 사용했고, 원래 VGG19 network에서는 pooling�
 ![Figure2](https://user-images.githubusercontent.com/54407983/100339088-c0fdad00-301c-11eb-8234-e6f4564ffda4.jpeg)
 
 ### Style representation
-reference_image로부터 style 정보를 추출하기 위해서 Gram matrix를 이용한다.
+- reference_image로부터 style 정보를 추출하기 위해서 Gram matrix를 이용한다.
 Gram matrix는 서로 다른 feature map간에 correlation을 측정하기 위해 사용된다.
 Gram maxrix를 구하는 과정인 아래 그림의 내요에 대해서 설명해 보면,
 특정 layer의 feature map size가 (400, 599, 64)라고 가정하면 이 숫자들은 (width, height, channel)의 정보를 의미하는데, (64, 400, 599)처럼 channel first로 변경후 width와 height를 곱해서 정보를 표현한는 것으로 다시 변경하면 (64, 239600)이 된다. 이것이 논문에서 말하는 F_ik이다.
