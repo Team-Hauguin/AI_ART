@@ -19,7 +19,7 @@ feature extraction용으로 사용했고, 원래 VGG19 network에서는 pooling�
 그런데 이 논문에서는 Network의 weights를 변경해가는 것이 아니라 generated_image를 구성하는 값들을 iterative하게 변경해가면서 원하는 output image를 만들어 나간다.
 
 - 학습과정은 어느 방향으로 이루어지는 것일까를 생각해보면 아래식과 같다. distance() 함수는 쉽게 표현하고자 사용한 표기일 뿐 L2 Norm 등으로 대체될 수 있는 함수이다.
-즉 우리가 원하는 최종 아웃풋인 generated_image(=combination image)는 style 정보는 reference_image(=source image)에서 가져와야하고 content 정보는 original_image(=base image)에서 가져와야 하기 때문에 아래와 같이 loss fucntion을 구성한뒤 training이 진행됨에 따라서 loss를 minimize해가면 된다.
+즉 우리가 원하는 최종 아웃풋인 generated_image(=combination image)의 style 정보는 reference_image(=source image)에서 가져와야하고 content 정보는 original_image(=base image)에서 가져와야 하기 때문에 아래와 같이 loss fucntion을 구성한뒤 loss가 minimize되는 방향으로 generated_image를 iterative하게 만들어 나간다.
 
 - minimize(loss) = distance[style(reference_image) - style(generated_image)] + distance[content(original_image)-content(generated_image)]
 
