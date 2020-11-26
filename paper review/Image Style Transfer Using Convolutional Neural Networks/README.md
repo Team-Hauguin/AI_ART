@@ -24,8 +24,8 @@ feature extraction용으로 사용했고, 원래 VGG19 network에서는 pooling�
 - minimize(loss) = distance[style(reference_image) - style(generated_image)] + distance[content(base image)-content(generated_image)]
 
 ### 3.1 Content representation
-아래 content의 Loss를 구하는 식의 구성을 보면, base_image의 feature map인 p와 generated_image의 feature map인 x와의 거리를 L2 loss를 이용하여 구함을 볼 수 있다.
-그리고 x의 feature map인 F_ij를 조금씩 변화시켜봤을때 Content Loss가 어떻게 변화하는지를 측정하고 있다.
+아래 content의 Loss를 구하는 식의 구성을 보면, base_image(=p)의 feature map인 P와 generated_image(=x)의 feature map인 F와의 거리를 L2 loss를 이용하여 구함을 볼 수 있다.
+그리고 Content Loss를 minimize하기 위해서 Content Loss를 generated_image의 feature map인 F에 대하여 미분하여 update해 나가면 된다는 것을 알 수 있다.
 ![Figure2](https://user-images.githubusercontent.com/54407983/100339088-c0fdad00-301c-11eb-8234-e6f4564ffda4.jpeg)
 
 ### 3.2 Style representation
