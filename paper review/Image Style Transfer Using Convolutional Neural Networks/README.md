@@ -31,16 +31,17 @@ feature extraction용으로 사용했고, 원래 VGG19 network에서는 pooling�
 
 ### 3.2 Style representation
 - reference_image로부터 style 정보를 추출하기 위해서 Gram matrix를 이용한다.
-Gram matrix는 서로 다른 feature map간에 correlation을 측정하기 위해 사용된다.
-Gram maxrix를 구하는 과정인 아래 그림의 내요에 대해서 설명해 보면,
-특정 layer의 feature map size가 (400, 599, 64)라고 가정하면 이 숫자들은 (width, height, channel)의 정보를 의미하는데, (64, 400, 599)처럼 channel first로 변경후 width와 height를 곱해서 정보를 표현한는 것으로 다시 변경하면 (64, 239600)이 된다. 이것이 논문에서 말하는 F_ik이다.
+즉 Gram matrix를 서로 다른 feature map간의 correlation을 측정하기 위해 사용하는 것이다.
+Gram maxrix를 구하는 과정인 아래 그림의 수식을 실제로 어떻게 적용하는 것인지에 대해서 추가적인 설명을 해보자면,
+특정 layer의 feature map size가 (400, 599, 64)라고 가정하면 이 숫자들은 (width, height, channel)의 정보를 의미하는데, (64, 400, 599)처럼 channel first로 변경후 width와 height를 곱해서 정보를 표현한는 것으로 다시 변경하면 (64, 239600)이 된다. 이것이 논문에서 말하는 (F_ik)^l이고 (F_jk)^l는 비교할 대상인 layer의 feature map을 transpose한 값이다.
 ![Figure3](https://user-images.githubusercontent.com/54407983/100340189-2736ff80-301e-11eb-9b95-ab63bfe72d54.jpeg)
 
 ### 3.3 Style transfer algorithm
-지금까지 살펴본 generated image의 content 정보를 어떻게 표현할 것인지와 style 정보를 어떻게 표현할 것인지를 전체 bird view 관점에서 살펴보면 아래 그림과 같다.
-generated_image와 reference_image를 VGG-Network을 통과시킨뒤 5개의 layer에서 그 거리를 측정하여 E_l를 구하고 어떤 가중치 w_l를 곱하여 전체 Style Loss를 구한다.
-generated_image와 content_image간의 Content Loss는 네트워크의 상단에 위치한 특정 레이어에서만 거리를 측정하여 L_content를 구한다. 상단의 특정 레이어에서 거리측정을 하는 이유는 CNN의 특성으로부터 기인한다. CNN의 경우 Network의 앞단(=input이 들어가는쪽의 layer or 하단)에서 점과 곡선 등의 low-level feature를 extraction하고 뒷단(=상단)에서 Object의 모양이라던지 Object들의 arrangement와 같은 high-level feature를 extraction한다고 알려져 있기 때문이다. 따라서 content_image의 건물 모양 같은 Object들의 Semantic한 정보를 보존하려면 Network의 상단에서 거리 측정을 해야한다.
-그리고 아래 그림의 가운데 하단쪽의 수식과 본 글의 서두에서 언급했다시피, 학습이 진행됨에 따라, Network의 weight를 변경해가는 것이 아니라, random noise에서 시작하는 x를 조금씩 변경해 나가면서 Loss_total이 작아지는 방향으로 x를 iterative하게 수정해 나가면서 최종적으로 원하는 x를 얻게 된다. 여기서 최종적으로 얻게 되는 x의 style 정보는 reference_image에서 가져왔으며 content 정보는 base_image로부터 가져온 형태가 될 것이다.
+- 지금까지 살펴본 generated image의 content 정보를 어떻게 계산할 것인지와 style 정보를 어떻게 계산할 것인지를 포함하여 최종적으로 generated_image를 어떻게 만들어 나갈 것인지 전체 과정을 bird view 관점에서 살펴보면 아래 그림과 같다.
+- generated_image와 reference_image를 VGG-Network을 통과시킨뒤 5개의 layer에서 그 거리를 측정하여 E_l를 구하고 어떤 가중치 w_l를 곱하여 전체 Style Loss를 구한다.
+- generated_image와 content_image간의 Content Loss는 네트워크의 상단에 위치한 특정 레이어에서만 거리를 측정하여 Content Loss를 구한다. 상단의 특정 레이어에서 거리측정을 하는 이유는 CNN의 특성으로부터 기인한다. CNN의 경우 Network의 앞단(=input이 들어가는쪽의 layer or 하단)에서 점과 곡선 등의 low-level feature를 extraction하고 뒷단(=상단)에서 Object의 모양이라던지 Object들의 arrangement와 같은 high-level feature를 extraction한다고 알려져 있기 때문이다. 따라서 content_image의 건물 모양 같은 Object들의 Semantic한 정보를 보존하려면 Network의 상단에서 거리 측정을 해야한다.
+- 그리고 아래 그림의 가운데 하단쪽의 수식과 같이 또는 본 글의 서두에서 언급했다시피 학습이 진행됨에 따라, Neural network의 weight를 변경해가는 것이 아니라, random noise에서 시작하는 x(=generated_image)를 조금씩 변경해 나가면서 Total Loss가 작아지는 방향으로 x를 iterative하게 수정해 나가면서 원하는 수준의 x를 얻게 된다. 여기서 최종적으로 얻게 되는 x의 style 정보는 reference_image에서 가져왔으며 semantic한 content 정보는 base_image로부터 가져온 형태가 될 것이다.
+- Total Loss의 식을 보면 알파와 베타의 값을 볼 수 있는데, 이 값들을 조정함으로써 아웃풋의 스타일 정보의 양과 시맨틱한 정보의 양을 조절할 수 있다.
 ![Figure4](https://user-images.githubusercontent.com/54407983/100341770-5a7a8e00-3020-11eb-9a44-2d389828f009.jpeg)
 
 ### 3.4 Style transfer
