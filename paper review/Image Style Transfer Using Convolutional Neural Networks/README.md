@@ -20,7 +20,8 @@ feature extraction용으로 사용했고, 원래 VGG19 network에서는 pooling�
 
 - 학습과정은 어느 방향으로 이루어지는 것일까를 생각해보면 아래식과 같다. distance() 함수는 쉽게 표현하고자 사용한 표기일 뿐 L2 Norm 등으로 대체될 수 있는 함수이다.
 즉 우리가 원하는 최종 아웃풋인 generated_image는 style 정보는 reference_image(=source image)에서 가져와야하고 content 정보는 original_image(=base image)에서 가져와야 하기 때문에 아래와 같이 loss fucntion을 구성한뒤 training이 진행됨에 따라서 loss를 minimize해가면 된다.
-minimize(loss) = distance[style(reference_image) - style(generated_image)] + distance[content(original_image)-content(generated_image)]
+
+- minimize(loss) = distance[style(reference_image) - style(generated_image)] + distance[content(original_image)-content(generated_image)]
 
 ### Content representation
 ### Style representation
