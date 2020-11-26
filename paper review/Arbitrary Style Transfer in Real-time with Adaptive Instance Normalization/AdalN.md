@@ -6,7 +6,7 @@
 * 논문저자 github사이트 https://github.com/xunhuang1995/AdaIN-style
 * [Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://towardsdatascience.com/fast-and-arbitrary-style-transfer-40e29d308dd3)
 
-Gatys et al는 DNN을 통해 이미지의 content와 style feature를 추출하고,
+Gatys et al.은 DNN을 통해 이미지의 content와 style feature를 추출하고,
 Arbitrary(임의)의 이미지에서 추출된 style feature를 병합하는 **Style transfer**를 제시하였습니다.
 그러나 Style transfer는 **연산속도가 매우 느리다는 단점**이 있습니다. 
 
@@ -29,13 +29,12 @@ BN은 주어진 batch x에 대해 각각의 feature channel의 평균과 분산�
 
 ### Instance Normalization
 원래의 style transfer에서는 각각의 convolutinal layer에 BN layer를 포함하고 있었으나,
-Ulyanov et al가 단순히 BN을 IN으로 바꾸는 것으로 놀라운 향상을 이끌어냇습니다. 
+Ulyanov et al.가 단순히 BN을 IN으로 바꾸는 것으로 놀라운 향상을 이끌어냇습니다. 
 
 ![IN](https://user-images.githubusercontent.com/8110442/100295018-d1d20280-2fcb-11eb-8e76-1b1d7aa4c60a.png)
-![IN2](https://user-images.githubusercontent.com/8110442/100295022-d4345c80-2fcb-11eb-949c-27d391862ee7.png)
 
 ### Conditional Instance Normalization
-Dumoulin et al은 알파인 parameter인 gamma, beta를 학습하는 대신에 다른 parameter set을 학습하는 conditional instance normalization (CIN)을 제안했습니다. 
+Dumoulin et al.은 알파인 parameter인 gamma, beta를 학습하는 대신에 다른 parameter set을 학습하는 conditional instance normalization (CIN)을 제안했습니다. 
 ![CIN](https://user-images.githubusercontent.com/8110442/100295468-085c4d00-2fcd-11eb-8e44-92f79efcfd3c.png)
 
 훈련과정에서 style 이미지는 고정된 이미지 셋(실험에서는 s=32)에서 random하게 선택됩니다.
@@ -47,16 +46,35 @@ Dumoulin et al은 알파인 parameter인 gamma, beta를 학습하는 대신에 �
 
 ## Interpreting Instance Normalization
 
-IN가 크게 성공했지만 Style transfer에 잘 작동하는 이유는 모릅니다. 
-IN의 성공은 
- 
+IN가 크게 성공했지만 Style transfer에서 잘 작동하는 이유는 명확하지 않습니다. 
+Ulyanov et al.[52] 가 제시한 IN의 성공은 content 이미지의 대조에 대한 불변성때문입니다. IN은 Feature공간에서 발생하므로 픽셀공간에서 나타나는 단순한 대비 정규화보다 더 큰 영향을 미칩니다. 더 놀라운것은 IN의 affine parameters는 output이미지의 스타일을 완전히 변경할 수 있다는 것입니다. 
+
+DNN의 convolutional feature 통계량은 이미지의 Style을 포착할 수 있는것을 잘 알려져 있습니다.
+반면 Gatys et al.은 2차 통계량을 최적화 목표로 사용하였습니다. Li et al.은 최근 채널 별 평균 및 분산을 포함한 다른 많은 통계를 일치시키는 것이 스타일 전달에 효과적이라는 것을 보여주었습니다. 
+이런 관찰에 영향을 받아 **Instance Normalization** 은 통계량을(평균과 분산) 정규화하여 스타일 정규화를 수행한다고 주장합니다. 
+그리고 DNN은 이미지 descriptor 역할을 수행하지만 또한 이미지를 생성할때 style을 제어할 수도 있다고 생각했습니다. 
+
+single-style trasfer를 위한 texture networks를 향상시키기 위해서 IN, BN을 활용한 Code를 실행했습니다. 
+예상했듯이 IN 변환이 BN모델보다 더 빨랐습니다. 
+우리는 모든 학습이미지를 luminace channel에서 histogram equlization에 의한 같은 대조에 의해서 정규화했습니다. 
+
+![IN2](https://user-images.githubusercontent.com/8110442/100295022-d4345c80-2fcb-11eb-949c-27d391862ee7.png)
+
+Fig.1 (b)에서 보여지듯이, IN 여전히 효율적입니다. Ulyanov et al.의 설명이 불완전함을 나타냅니다. 
+우리의 가정을 증명하기 위해 우리는 모든 학습 이미지를 같은 스타일로 정규화하고 Pretrained된 stlye transfer 네트워크를 제공했다. 
+Fig1.1 (c)에 따르면 이미지가 이미 style normalized되어 있을대 IN에 의한 개선은 훨씬 더 작아집니다. 
+남이있는 차이는 style normalization[24] 완벽하지 않다는 사실로 설명 할 수 있습니다. 
+또한 스타일 정규화 된 이미지에대해 훈련된 BN이 있는 모델은 원본 이미지에 대해 IN이 있는 모델만큼 빠르게 수렴할 수 있습니다. 
+우리의 결과는 IN이 style nomalization처럼 수행한다는 사실을 나타낸다. 
+
+## Adaptive Instance Normalization
 
 
 IN을 약간 변형한 AdaIN을 소개합니다. AdaIN은 단순히 Content input의 평균과 분산을 Style input의 평균과 분산으로 맞추도록 조절합니다.
 실험을 통해서 AdaIN이 효과적으로 병합하는 것을 확인하였습니다. 
 
 
-## Adaptive Instance Normalization
+
 ## Experimental Setup
 ## Training
 ## Result
