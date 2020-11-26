@@ -25,13 +25,15 @@ Ioffe and Szegedy가 소개한 batch normalization(BN)은 feature의 통계량�
 BN레이어는 원래 discriminative networks의 학습을 가속화 하기 위해 만들어졌으나 generative image modeling에도 효과가 있다고 알려져 있습니다. 
 
 BN은 주어진 batch x에 대해 각각의 feature channel의 평균과 분산을 정규화합니다. 
-
-
-computed across batch size and spatial dimensions independently for each feature channel
-
-
+![BN](https://user-images.githubusercontent.com/8110442/100293752-0c39a080-2fc8-11eb-8dba-bc4bc4352572.png)
 
 ### Instance Normalization
+원래의 style transfer에서는 각각의 convolutinal layer에 BN layer를 포함하고 있었으나,
+Ulyanov et al가 단순히 BN을 IN으로 바꾸는 것으로 놀라운 향상을 이끌어 냇습니다. 
+
+
+
+
 ### Conditional Instance Normalization
 
 
@@ -47,35 +49,14 @@ IN을 약간 변형한 AdaIN을 소개합니다. AdaIN은 단순히 Content inpu
 ## Result
 
 
-# This is an <h1> tag
-## This is an <h2> tag
-###### This is an <h6> tag
-
-*This text will be italic*
-_This will also be italic_
-
-**This text will be bold**
-__This will also be bold__
-
-_You **can** combine them_
-
-* Item 1
-* Item 2
-  * Item 2a
-  * Item 2b
   
 1. Item 1
 1. Item 2
 1. Item 3
    1. Item 3a
    1. Item 3b
-   
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](url)
-
-
-http://github.com - automatic!
-[GitHub](http://github.com)
+  
+  
 
 As Kanye West said:
 
