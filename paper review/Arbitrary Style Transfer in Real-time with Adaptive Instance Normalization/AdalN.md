@@ -36,18 +36,21 @@ Ulyanov et al가 단순히 BN을 IN으로 바꾸는 것으로 놀라운 향상�
 
 ### Conditional Instance Normalization
 Dumoulin et al은 알파인 parameter인 gamma, beta를 학습하는 대신에 다른 parameter set을 학습하는 conditional instance normalization (CIN)을 제안했습니다. 
+![CIN](https://user-images.githubusercontent.com/8110442/100295468-085c4d00-2fcd-11eb-8e44-92f79efcfd3c.png)
 
+훈련과정에서 style 이미지는 고정된 이미지 셋(실험에서는 s=32)에서 random하게 선택됩니다.
+그 다음 content이미지는 CIN에서 사용된 parameter에 의한 스타일 전송 네트워크에 의해 처리됩니다. 
+놀랍게도 네트워크는 동일한 컨볼루션 매개 변수, 다른 affine parameter를 사용하여 완전히 다른 스타일의 이미지를 생성할 수 있습니다. 
 
+하지만 CIN layer가 포함된 네트워크는 정규화 layer가 없는 네트워크와 비교하여 2*F*S 추가 매개변수가 필요합니다.(F:네트워크 Feature map수)
+스타일 수에 따라 추가 paramaeter 수가 선형적으로 늘어나기 때문에 많은 스타일을 모델링하기 위해 확장하는것이 어렵고 또한 재학습이 없는 임의의 style적용에 맞지 않는 방법입니다.  
 
-
-
+## Interpreting Instance Normalization
 
 IN을 약간 변형한 AdaIN을 소개합니다. AdaIN은 단순히 Content input의 평균과 분산을 Style input의 평균과 분산으로 맞추도록 조절합니다.
 실험을 통해서 AdaIN이 효과적으로 병합하는 것을 확인하였습니다. 
 
 
-
-## Interpreting Instance Normalization
 ## Adaptive Instance Normalization
 ## Experimental Setup
 ## Training
