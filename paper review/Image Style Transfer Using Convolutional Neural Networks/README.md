@@ -29,6 +29,10 @@ feature extraction용으로 사용했고, 원래 VGG19 network에서는 pooling�
 ![Figure2](https://user-images.githubusercontent.com/54407983/100339088-c0fdad00-301c-11eb-8234-e6f4564ffda4.jpeg)
 
 ### Style representation
+reference_image로부터 style 정보를 추출하기 위해서 Gram matrix를 이용한다.
+Gram matrix는 서로 다른 feature map간에 correlation을 측정하기 위해 사용된다.
+![Figure3](https://user-images.githubusercontent.com/54407983/100340189-2736ff80-301e-11eb-9b95-ab63bfe72d54.jpeg)
+
 ### Style transfer
 
 ## Result
