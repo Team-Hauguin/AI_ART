@@ -74,7 +74,13 @@ Head Pose Reenactment를 목표로 하기 때문에, Dice Coefficient Loss, Cont
 
 # Result
 ## 1) Accuracy
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Accuracy.PNG" width="30%">
+</img>
 
 ## 2) Error
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/Error.PNG" width="30%">
+</img>
 
 ## 3) Result Image
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/result.PNG" width="90%">
+</img>
