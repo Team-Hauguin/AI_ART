@@ -1,7 +1,9 @@
 # Image Style Transfer Using Convolutional Neural Networks, Leon A. Gatys
 
-## Code
+## Code & Results
 - https://github.com/NoPainNoCode/Neural_Style_Transfer
+- 구현 코드는 위 url의 style_transfer.ipynb를 참고하면 된다.
+- result 폴더에 100 epoch마다 target image를 저장하도록 했다. 따라서 source image의 texture가 어떻게 target image에 tranfer되어 가는지 그 양상을 확인할 수 있다.
 
 ## Introduction
 저자들은 'Neural Algorithm of Artistic Style'이라는 새로운 방법론을 논문을 통해 제시하며 이 알고리즘을 통해서 'image style transfer'를 기존의 방법들보다 더 효과적으로 수행할수 있다고 주장한다.
