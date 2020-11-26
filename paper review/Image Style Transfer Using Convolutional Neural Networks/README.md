@@ -44,11 +44,13 @@ Gram maxrix를 구하는 과정인 아래 그림의 수식을 실제로 어떻�
 ![Figure4](https://user-images.githubusercontent.com/54407983/100341770-5a7a8e00-3020-11eb-9a44-2d389828f009.jpeg)
 
 ### 3.4 Style transfer
+![Figure5](https://user-images.githubusercontent.com/54407983/100373558-4f3e5700-304e-11eb-9d5b-d6bb48b52caf.jpeg)
 
 ## 4. Result
-### 4.1 Trade-off between content and style matching
-### 4.2 Effect of different layers of the Convolutional Neural Network
-### 4.3 Initialisation of gradient descent
-### 4.4 Photorealistic style transfer
+본 논문의 key finding은 CNN을 활용하여 style representation과 content representation을 separable하게 구할 수 있는 방법을 제시한 것이다.
 
 ## 5. Discussion
+알고리즘에 기술적 한계점이 있다. 즉 이미지 합성 속도는 입력 이미지의 해상도에 굉장히 의존적이다. 
+CNN이 입력 이미지의 크기에 따라서 연산속도가 크게 영향을 받기 때문이다.
+따라서 online or interative application에 적용하기에는 한계가 있다.
+논문이 작성될 시점에 Nvidia K40 GPU를 사용해서 입력의 해상도가 512x512인 이미지를 가지고 합성할때 약 1시간 정도가 소요되었다고 한다.
