@@ -49,15 +49,28 @@ Landmark(=Facial Landmark)란 위 그림처럼 눈썹, 코, 입술과 같이 사
 <img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/1.PNG" width="90%">
 </img>
 
-## 1) Identity encoder
+## 1) Identity Encoder
+Identity Encoder란 이미지의 Style을 추출하는 Network이다.
+전체 구조에서처럼 k장(논문에서는 8장)의 이미지를 각각 Convolusion하여 512*k embedding vector로 만들고, 각 row의 평균을 가지는 512*1 identity embedding을 만들어낸다.
+해당 embedding은 Pose Encoder에서 추출한 pose embedding과 결합하여 이미지 생성을 위한 Latent Vector로 사용된다.
 
-## 2) Pose encoder
+## 2) Pose Encoder
+Pose Encoder란 이미지의 Head Pose(Head Orientation, Head Position, Head Expression)을 추출하는 Network이다.
+1장의 이미지를 Convolusion하여 embedding vector로 만들고, 해당 embedding은 Identity Encoder에서 추출한 identity embedding과 결합하여 이미지 생성을 위한 Latent Vector로 사용된다.
 
 ## 3) Style Based Generator
+<img src="https://github.com/Team-Hauguin/AI_ART/blob/main/paper%20review/Nueral%20Head%20Reenactment%20With%20Latent%20Pose%20Descriptor/img/style_based_generator.PNG" width="90%">
+</img>
 
-## 4) Discriminator
+Style Based Generator는 A Style-Based Generator Architecture for Generative Adversarial Networks에서 제안된 Network이다.
+Fully Connected Layer를 통과시킨 Latent Vector를 Generator에 반복적으로 입력하여 원하는 스타일의 이미지를 생성한다.
+본 논문에서는 Identity Encoder, Pose Encoder를 통과시킨 embedding을 Latent Vector로 사용하여 이미지를 생성한다.
 
-## 5) Loss
+## 4) Loss
+Head Pose Reenactment를 목표로 하기 때문에, Dice Coefficient Loss, Content Loss, Adversarial Loss를 사용한다.
+  - Dice Coefficient Loss : 생성된 이미지를 Foreground Segmentation하여 원본 이미지의 Foreground Segmentation과 면적이 동일한지에 대한 Loss
+  - Content Loss : 생성된 이미지가 원본 이미지와 동일한 스타일인지에 대한 Loss
+  - Adversarial Loss : 실제같은 이미지인지 대한 Loss
 
 # Result
 ## 1) Accuracy
