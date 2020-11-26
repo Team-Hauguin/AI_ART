@@ -70,7 +70,7 @@ Fully Connected Layer를 통과시킨 Latent Vector를 Generator에 반복적으
 Head Pose Reenactment를 목표로 하기 때문에, Dice Coefficient Loss, Content Loss, Adversarial Loss를 사용한다.
   - Dice Coefficient Loss : 생성된 이미지를 Foreground Segmentation하여 원본 이미지의 Foreground Segmentation과 면적이 동일한지에 대한 Loss
   - Content Loss : 생성된 이미지가 원본 이미지와 동일한 스타일인지에 대한 Loss
-  - Adversarial Loss : 실제같은 이미지인지 대한 Loss
+  - Adversarial Loss : 실제같은 이미지인지에 대한 Loss
 
 # Result
 ## 1) Accuracy
