@@ -95,52 +95,68 @@ In short, AdaIN performs style transfer in the feature space by transferring fea
 
 
 ## Experimental Setup
+
+![adain2](https://user-images.githubusercontent.com/8110442/100517567-c0a51380-31ce-11eb-9265-af159ea41d18.PNG)
+
+위의 style transfer network은 제안된 AdaIN layer를 기반으로 생성되었습니다.  
+이 모델의 앞부분 Encoder는 VGG-19를 통해 미리 학습된 layer인 simple encoder-decoder architecture를 가져왔습니다.
+그 후 content, style이미지를 feature 공간에서 encoding하고 우리는 feature map을 adaIN layer에 의해서 content feature map의 평균과 분산을 style feature map의 그것으로 정렬시키고 target feature map을 만들었습니다. 
+* T : style transfer network
+* t : target feature maps
+* c : content image
+* s : style image
+
+랜덤하게 초기화된 decoder g는 map t를 이미지 공간으로 학습된다. 그리고 style이미지를 생성한다. 
+
+디코더는 대부분 인코더를 미러링하며 모든 풀링 레이어는 바둑판 효과를 줄이기 위해 가장 가까운 업 샘플링으로 대체됩니다. 테두리 아티팩트를 피하기 위해 f와 g 모두에 반사 패딩을 사용합니다. 또 다른 중요한 아키텍처 선택은 디코더가 인스턴스, 배치 또는 정규화 레이어를 사용해야하는지 여부입니다. Sec. 4, IN은 각 샘플을 단일 스타일로 정규화하는 반면 BN은 샘플 배치를 단일 스타일을 중심으로 정규화합니다. 디코더가 매우 다른 스타일의 이미지를 생성하도록하려면 둘 다 바람직하지 않습니다. 따라서 디코더에서 정규화 레이어를 사용하지 않습니다. 초. 7.1 우리는 디코더의 IN / BN 레이어가 실제로 성능을 저하시키는 것을 보여줄 것입니다.
+
+The decoder mostly mirrors the encoder, with all pooling layers replaced by nearest up-sampling to reduce checkerboard effects. We use reflection padding in both f and g to avoid border artifacts. Another important architectural choice is whether the decoder should use instance, batch, or no normalization layers. As discussed in Sec. 4, IN normalizes each sample to a single style while BN normalizes a batch of samples to be centered around a single style. Both are undesirable when we want the decoder to generate images in vastly different styles. Thus, we do not use normalization layers in the decoder. In Sec. 7.1 we will show that  IN/BN layers in the decoder indeed hurt performance.
+
+
 ## Training
+이 논문에서는 [6]의 설정에 따라 콘텐츠 이미지로 MS-COCO [36]를 사용하고 WikiArt [39]에서 주로 수집 한 그림 데이터 세트를 스타일 이미지로 사용하여 네트워크를 훈련시켰습니다. 각각의 데이터 셋은 80,000개의 샘플을 학습시켰습니다. adam optimizer, batch-size = 8를 사용했습니다. 
+첫번째로 가로세로비율을 유지하며 짧은 쪽의 이미지사이즈를 512 조정하고, 256 * 256 영역을 랜덤하게 잘랐습니다. 
+네트워크는 fully convolutional이므로 모든 크기의 이미지에 적용할 수 있습니다. 
+
+[51, 11, 52]방식과 유사하게 미리 학습된 VGG19을 사용했고 content loss와 style loss의 조합으로 손실함수를 계산했습니다. 
+content loss는 target feature와 output image와의 유클리드 거리를 사용했습니다. 
+AdaIN layer는 오직 스타일 feature의 평균과 분산을 전달시키므로 style loss는 이 통계량에만 일치합니다. 일반적으로 사용되는 gram matrix가 비슷한 손실을 생성할 수 있지만 개념적으로 더 간결하기 때문에 IN통계와 일치했습니다.(Li et al. [33])
+VGG-19레이어 내부의 각 φi는 style loss를 계산합니다. 이 실험에서는 relu1 1, relu2 1, relu3 1, relu4 1 layers를 동일한 가중치로 사용했습니다. 
+
+[그림]
+
 ## Result
 
+결과 비교를 위해서 3가지 방식의 style transfer와 비교하였습니다. 
+1. the flexible but slow optimization-based method [16]
+2. the fast feed-forward method restricted to a single style [52]
+3. the flexible patch-based method of medium speed [6]
+기타 : default configurations.
 
-  
-1. Item 1
-1. Item 2
-1. Item 3
-   1. Item 3a
-   1. Item 3b
-  
-  
+**1. Qualitative Examples**  
 
-As Kanye West said:
+5번째 행의 예시와 같이 몇가지 케이스에서는 [16], [52]방식과 비교했을때 품질이 조금 떨어지는 것으로 보입니다. speed, flecibility, quality에서 trade-off가 있기 때문에 충분히 발생가능합니다.  
+[6]과 비교해보면 AdaIN 방식은 좀더 충실하게 스타일을 전송하는것으로 보입니다. 
+마지막 예제에서 각 content-patch를 가장 가까운 style-patch와 일치하도록 시도하는 것에서 [6]의 한계를 명확하게 볼 수 있습니다. 
+대부분의 content-patch가 타겟style의 대표스타일이 아닌 지역적인 스타일과 match되면 스타일 전송은 실패했다고 여겨집니다.
+따라서 일부경우 [6]이 더 매력적인 결과를 생성할 수 있지만 대표스타일과 통계를 일치시키는 것이 더 일반적인(_안정적인_) 솔루션이라고 이야기하고 있습니다.  
 
-> We're living the future so
-> the present is our past.
+**2. Quantitative evaluations**
 
-I think you should use an
-`<addr>` element here instead.
+AdaIN 방식은 빠른속도와 유연성 vs 어느정도의 품질(저하) 가 trade-off로 작용하고 있습니다. 그렇다면 품질저하의 정도는 얼마나 될까요? 
+이를 비교하기 위해 최적화를 기반으로하는 [16], fast single-style transfer [52] 와 스타일 손실 측면에서 비교했습니다. 
+[그림6]
 
-```javascript
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
-  }
-}
-```
+손실은 [52, 16]과 동일하게 산출되었습니다. 
+AdaIN 방식과 [52]의 방식은 최적화 50~100 반복에서 유사한 스타일 손실을 얻습니다. 이는 AdaIN 방식의 강력한 일반화 능력을 보여줍니다. 또한 스타일 손실은 원본 콘텐츠 이미지보다 훨씬 작습니다. 
 
-    function fancyAlert(arg) {
-      if(arg) {
-        $.facebox({div:'#foo'})
-      }
-    }
-    
-    
-def foo():
-    if not bar:
-        return True
+**3. Speed analysis**
 
-- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
-- [x] list syntax required (any unordered or ordered list supported)
-- [x] this is a complete item
-- [ ] this is an incomplete item
+대부분의 계산시간은 content encoding, style encoding, and decoding하는데 소비합니다(각각 1/3정도). 
+비디오 처리같은 일부 애플리케이션 시나리오에서 스타일 이미지는 한번만 인코딩 되어야 하며 AdaIN은 저장된 스타일 통계를 사용하여 모든 후속 이미지를 처리할 수 있습니다. 
+스타일 인코딩 시간을 제외하고 알고리즘은 256*256, 512*512 이미지에 대해 각각 56 및 12FPS로 실행되므로 사용자가 업로드한 임의의 스타일을 실시간으로 처리 할 수 있습니다. 
+[16]보다 약 3배 빠르며 [6]보다 1-2배 빠릅니다. 
 
-First Header | Second Header
------------- | -------------
-Content from cell 1 | Content from cell 2
-Content in the first column | Content in the second column
+**4.to high resolution style images** 
+
+게다가 AdaIN 방식은 몇 가지 스타일로 제한되는 feed-forward 방법과 비슷한 속도를 냅니다.[52, 11] 이 방식이 처리 시간이 약간 더 긴 것은 VGG 기반 네트워크 때문입니다. 보다 효율적인 아키텍쳐를 사용하면 속도를 더 향상시킬 수 있습니다. 임의의 스타일에 적용 할 수 있는 다른 기존 알고리즘보다 훨씬 빠르면서도 적은수의 스타일로 제한된 방법과 비슷한 속도를 보입니다. 
