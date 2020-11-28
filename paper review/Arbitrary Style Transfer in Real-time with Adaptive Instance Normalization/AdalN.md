@@ -49,7 +49,7 @@ Dumoulin et al.은 알파인 parameter인 gamma, beta를 학습하는 대신에 
 하지만 CIN layer가 포함된 네트워크는 정규화 layer가 없는 네트워크와 비교하여 2*F*S 추가 매개변수가 필요합니다.(F:네트워크 Feature map수)
 스타일 수에 따라 추가 paramaeter 수가 선형적으로 늘어나기 때문에 많은 스타일을 모델링하기 위해 확장하는것이 어렵고 또한 재학습이 없는 임의의 style적용에 맞지 않는 방법입니다.  
 
-## 2.4 Interpreting Instance Normalization
+### 2.4 Interpreting Instance Normalization
 
 IN가 크게 성공했지만 Style transfer에서 잘 작동하는 이유는 명확하지 않습니다. 
 Ulyanov et al.[52] 가 제시한 IN의 성공은 content 이미지의 대조에 대한 불변성때문입니다. IN은 Feature공간에서 발생하므로 픽셀공간에서 나타나는 단순한 대비 정규화보다 더 큰 영향을 미칩니다. 더 놀라운것은 IN의 affine parameters는 output이미지의 스타일을 완전히 변경할 수 있다는 것입니다. 
