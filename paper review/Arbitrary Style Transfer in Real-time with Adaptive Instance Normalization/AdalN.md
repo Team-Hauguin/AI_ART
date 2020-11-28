@@ -3,8 +3,9 @@
 
 참고 사이트
 
-* 논문저자 github사이트 https://github.com/xunhuang1995/AdaIN-style
-* [Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://towardsdatascience.com/fast-and-arbitrary-style-transfer-40e29d308dd3)
+* [ [논문사이트] Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868)
+* [논문저자 github사이트] https://github.com/xunhuang1995/AdaIN-style
+* [ [참고페이지] Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://towardsdatascience.com/fast-and-arbitrary-style-transfer-40e29d308dd3)
 
 Gatys et al.은 DNN을 통해 이미지의 content와 style feature를 추출하고,
 Arbitrary(임의)의 이미지에서 추출된 style feature를 병합하는 **Style transfer**를 제시하였습니다.
@@ -19,7 +20,7 @@ AdaIN 레이어는 Content feature의 평균과 분산을 Style feature의 평�
 AdaIN은 Feed-forward style transfer에서 매우 효과적인 Instance Normalization(IN)에서 영감을 얻었습니다.
 
 ### Batch Normalization
-* [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)
+* [ [논문 사이트] Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)
 
 Ioffe and Szegedy가 소개한 batch normalization(BN)은 feature의 통계량을 normalizing하여 feed-forward networks의 학습을 매우 쉽게 만들었습니다.
 BN레이어는 원래 discriminative networks의 학습을 가속화 하기 위해 만들어졌으나 generative image modeling에도 효과가 있다고 알려져 있습니다. 
@@ -28,6 +29,10 @@ BN은 주어진 batch x에 대해 각각의 feature channel의 평균과 분산�
 ![BN](https://user-images.githubusercontent.com/8110442/100293752-0c39a080-2fc8-11eb-8dba-bc4bc4352572.png)
 
 ### Instance Normalization
+* [ [논문 사이트] Instance Normalization: The Missing Ingredient for Fast Stylization](https://arxiv.org/abs/1607.08022)
+
+
+
 원래의 style transfer에서는 각각의 convolutinal layer에 BN layer를 포함하고 있었으나,
 Ulyanov et al.가 단순히 BN을 IN으로 바꾸는 것으로 놀라운 향상을 이끌어냇습니다. 
 
@@ -68,6 +73,15 @@ Fig1.1 (c)에 따르면 이미지가 이미 style normalized되어 있을대 IN�
 우리의 결과는 IN이 style nomalization처럼 수행한다는 사실을 나타낸다. 
 
 ## Adaptive Instance Normalization
+
+IN이 affine 매개 변수에 의해 지정된 단일 스타일로 입력을 정규화하는 경우, 적응 적 아핀 변환을 사용하여 임의로 지정된 스타일에 적응시킬 수 있습니까? 
+여기서는 적응 형 인스턴스 정규화 (AdaIN)라고하는 IN에 대한 간단한 확장을 제안합니다. 
+AdaIN은 콘텐츠 입력 x와 스타일 입력 y를 수신하고 x의 채널 별 평균과 분산을 y와 일치하도록 정렬합니다. 
+BN, IN 또는 CIN과 달리 AdaIN에는 학습 가능한 아핀 매개 변수가 없습니다. 
+대신 스타일 입력에서 affine 매개 변수를 적응 적으로 계산합니다.
+
+
+
 
 
 IN을 약간 변형한 AdaIN을 소개합니다. AdaIN은 단순히 Content input의 평균과 분산을 Style input의 평균과 분산으로 맞추도록 조절합니다.
