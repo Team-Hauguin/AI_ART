@@ -1,5 +1,5 @@
 # Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization
-## Introduction
+## 1. Introduction
 
 참고 사이트
 
@@ -9,17 +9,17 @@
 
 Gatys et al.은 DNN을 통해 이미지의 content와 style feature를 추출하고,
 Arbitrary(임의)의 이미지에서 추출된 style feature를 병합하는 **Style transfer**를 제시하였습니다.
-그러나 Style transfer는 **연산속도가 매우 느리다는 단점**이 있습니다. 
+그러나 Style transfer는 *연산속도가 매우 느리다는 단점*이 있습니다. 
 
-이 논문에서는 이미지를 **실시간(그만큼 빠른)** 으로 임의의 style로 바꾸는 방식을 제안하고자 합니다. 
+이 논문에서는 이미지를 *실시간(그만큼 빠른)* 으로 임의의 style로 바꾸는 방식을 제안하고자 합니다. 
 이 방식의 핵심은 __adaptive instance normalization(AdaIN)__ 입니다. 
 AdaIN 레이어는 Content feature의 평균과 분산을 Style feature의 평균과 분산으로 정렬하는 기능을 갖습니다. 
 이 방식은 사전에 학습할 필요가 없고 매우 빠릅니다. 
 
-## Background
+## 2. Background
 AdaIN은 Feed-forward style transfer에서 매우 효과적인 Instance Normalization(IN)에서 영감을 얻었습니다.
 
-### Batch Normalization
+### 2.1 Batch Normalization
 * [ [논문 사이트] Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)
 
 Ioffe and Szegedy가 소개한 batch normalization(BN)은 feature의 통계량을 normalizing하여 feed-forward networks의 학습을 매우 쉽게 만들었습니다.
@@ -28,7 +28,7 @@ BN레이어는 원래 discriminative networks의 학습을 가속화 하기 위�
 BN은 주어진 batch x에 대해 각각의 feature channel의 평균과 분산을 정규화합니다. 
 ![BN](https://user-images.githubusercontent.com/8110442/100293752-0c39a080-2fc8-11eb-8dba-bc4bc4352572.png)
 
-### Instance Normalization
+### 2.2 Instance Normalization
 * [ [논문 사이트] Instance Normalization: The Missing Ingredient for Fast Stylization](https://arxiv.org/abs/1607.08022)
 
 
@@ -38,7 +38,7 @@ Ulyanov et al.가 단순히 BN을 IN으로 바꾸는 것으로 놀라운 향상�
 
 ![IN](https://user-images.githubusercontent.com/8110442/100295018-d1d20280-2fcb-11eb-8e76-1b1d7aa4c60a.png)
 
-### Conditional Instance Normalization
+### 2.3 Conditional Instance Normalization
 Dumoulin et al.은 알파인 parameter인 gamma, beta를 학습하는 대신에 다른 parameter set을 학습하는 conditional instance normalization (CIN)을 제안했습니다. 
 ![CIN](https://user-images.githubusercontent.com/8110442/100295468-085c4d00-2fcd-11eb-8e44-92f79efcfd3c.png)
 
@@ -49,7 +49,7 @@ Dumoulin et al.은 알파인 parameter인 gamma, beta를 학습하는 대신에 
 하지만 CIN layer가 포함된 네트워크는 정규화 layer가 없는 네트워크와 비교하여 2*F*S 추가 매개변수가 필요합니다.(F:네트워크 Feature map수)
 스타일 수에 따라 추가 paramaeter 수가 선형적으로 늘어나기 때문에 많은 스타일을 모델링하기 위해 확장하는것이 어렵고 또한 재학습이 없는 임의의 style적용에 맞지 않는 방법입니다.  
 
-## Interpreting Instance Normalization
+## 2.4 Interpreting Instance Normalization
 
 IN가 크게 성공했지만 Style transfer에서 잘 작동하는 이유는 명확하지 않습니다. 
 Ulyanov et al.[52] 가 제시한 IN의 성공은 content 이미지의 대조에 대한 불변성때문입니다. IN은 Feature공간에서 발생하므로 픽셀공간에서 나타나는 단순한 대비 정규화보다 더 큰 영향을 미칩니다. 더 놀라운것은 IN의 affine parameters는 output이미지의 스타일을 완전히 변경할 수 있다는 것입니다. 
@@ -72,7 +72,7 @@ Fig1.1 (c)에 따르면 이미지가 이미 style normalized되어 있을대 IN�
 또한 스타일 정규화 된 이미지에대해 훈련된 BN이 있는 모델은 원본 이미지에 대해 IN이 있는 모델만큼 빠르게 수렴할 수 있습니다. 
 우리의 결과는 IN이 style nomalization처럼 수행한다는 사실을 나타낸다. 
 
-## Adaptive Instance Normalization
+## 3. Adaptive Instance Normalization
 
 IN이 affine 매개 변수에 의해 지정된 단일 스타일로 입력을 정규화하는 경우, 적응 적 아핀 변환을 사용하여 임의로 지정된 스타일에 적응시킬 수 있습니까? 
 여기서는 적응 형 인스턴스 정규화 (AdaIN)라고하는 IN에 대한 간단한 확장을 제안합니다. 
@@ -94,8 +94,8 @@ In short, AdaIN performs style transfer in the feature space by transferring fea
 
 
 
-## Experimental Setup
-
+## 4. Experimental Setup
+### 4.1 Architecture
 ![adain2](https://user-images.githubusercontent.com/8110442/100517567-c0a51380-31ce-11eb-9265-af159ea41d18.PNG)
 
 위의 style transfer network은 제안된 AdaIN layer를 기반으로 생성되었습니다.  
@@ -113,7 +113,7 @@ In short, AdaIN performs style transfer in the feature space by transferring fea
 The decoder mostly mirrors the encoder, with all pooling layers replaced by nearest up-sampling to reduce checkerboard effects. We use reflection padding in both f and g to avoid border artifacts. Another important architectural choice is whether the decoder should use instance, batch, or no normalization layers. As discussed in Sec. 4, IN normalizes each sample to a single style while BN normalizes a batch of samples to be centered around a single style. Both are undesirable when we want the decoder to generate images in vastly different styles. Thus, we do not use normalization layers in the decoder. In Sec. 7.1 we will show that  IN/BN layers in the decoder indeed hurt performance.
 
 
-## Training
+### 4.2 Training
 이 논문에서는 [6]의 설정에 따라 콘텐츠 이미지로 MS-COCO [36]를 사용하고 WikiArt [39]에서 주로 수집 한 그림 데이터 세트를 스타일 이미지로 사용하여 네트워크를 훈련시켰습니다. 각각의 데이터 셋은 80,000개의 샘플을 학습시켰습니다. adam optimizer, batch-size = 8를 사용했습니다. 
 첫번째로 가로세로비율을 유지하며 짧은 쪽의 이미지사이즈를 512 조정하고, 256 * 256 영역을 랜덤하게 잘랐습니다. 
 네트워크는 fully convolutional이므로 모든 크기의 이미지에 적용할 수 있습니다. 
@@ -125,7 +125,7 @@ VGG-19레이어 내부의 각 φi는 style loss를 계산합니다. 이 실험�
 
 [그림]
 
-## Result
+## 5. Result
 
 결과 비교를 위해서 3가지 방식의 style transfer와 비교하였습니다. 
 1. the flexible but slow optimization-based method [16]
