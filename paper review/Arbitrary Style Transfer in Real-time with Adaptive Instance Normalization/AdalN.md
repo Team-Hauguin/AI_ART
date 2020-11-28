@@ -9,7 +9,7 @@
 
 Gatys et al.은 DNN을 통해 이미지의 content와 style feature를 추출하고,
 Arbitrary(임의)의 이미지에서 추출된 style feature를 병합하는 **Style transfer**를 제시하였습니다.
-그러나 Style transfer는 *연산속도가 매우 느리다는 단점*이 있습니다. 
+그러나 Style transfer는 *연산속도가 매우 느리다는 단점* 이 있습니다. 
 
 이 논문에서는 이미지를 *실시간(그만큼 빠른)* 으로 임의의 style로 바꾸는 방식을 제안하고자 합니다. 
 이 방식의 핵심은 __adaptive instance normalization(AdaIN)__ 입니다. 
@@ -52,6 +52,7 @@ Dumoulin et al.은 알파인 parameter인 gamma, beta를 학습하는 대신에 
 ### 2.4 Interpreting Instance Normalization
 
 IN가 크게 성공했지만 Style transfer에서 잘 작동하는 이유는 명확하지 않습니다. 
+
 Ulyanov et al.[52] 가 제시한 IN의 성공은 content 이미지의 대조에 대한 불변성때문입니다. IN은 Feature공간에서 발생하므로 픽셀공간에서 나타나는 단순한 대비 정규화보다 더 큰 영향을 미칩니다. 더 놀라운것은 IN의 affine parameters는 output이미지의 스타일을 완전히 변경할 수 있다는 것입니다. 
 
 DNN의 convolutional feature 통계량은 이미지의 Style을 포착할 수 있는것을 잘 알려져 있습니다.
@@ -66,29 +67,25 @@ single-style trasfer를 위한 texture networks를 향상시키기 위해서 IN,
 ![IN2](https://user-images.githubusercontent.com/8110442/100295022-d4345c80-2fcb-11eb-949c-27d391862ee7.png)
 
 Fig.1 (b)에서 보여지듯이, IN 여전히 효율적입니다. Ulyanov et al.의 설명이 불완전함을 나타냅니다. 
-우리의 가정을 증명하기 위해 우리는 모든 학습 이미지를 같은 스타일로 정규화하고 Pretrained된 stlye transfer 네트워크를 제공했다. 
+우리의 가정을 증명하기 위해 우리는 모든 학습 이미지를 같은 스타일로 정규화하고 Pretrained된 stlye transfer 네트워크를 제공했습니다. 
 Fig1.1 (c)에 따르면 이미지가 이미 style normalized되어 있을대 IN에 의한 개선은 훨씬 더 작아집니다. 
 남이있는 차이는 style normalization[24] 완벽하지 않다는 사실로 설명 할 수 있습니다. 
 또한 스타일 정규화 된 이미지에대해 훈련된 BN이 있는 모델은 원본 이미지에 대해 IN이 있는 모델만큼 빠르게 수렴할 수 있습니다. 
-우리의 결과는 IN이 style nomalization처럼 수행한다는 사실을 나타낸다. 
+우리의 결과는 IN이 style nomalization처럼 작동한다는 사실을 나타냅니다.
 
 ## 3. Adaptive Instance Normalization
 
-IN이 affine 매개 변수에 의해 지정된 단일 스타일로 입력을 정규화하는 경우, 적응 적 아핀 변환을 사용하여 임의로 지정된 스타일에 적응시킬 수 있습니까? 
-여기서는 적응 형 인스턴스 정규화 (AdaIN)라고하는 IN에 대한 간단한 확장을 제안합니다. 
-AdaIN은 콘텐츠 입력 x와 스타일 입력 y를 수신하고 x의 채널 별 평균과 분산을 y와 일치하도록 정렬합니다. 
+IN이 affine 매개 변수에 의해 지정된 단일 스타일로 입력을 정규화하는 경우, 아핀 변환을 사용하여 임의로 지정된 스타일에 적응시킬 수 있습니까? 
+여기서는 Adaptive Instance Normalization(AdaIN)라고하는 IN에 대한 간단한 확장을 제안합니다. 
+AdaIN은 content input x와 style input y를 수신하고 x의 채널 별 평균과 분산을 y와 일치하도록 정렬합니다. 
 BN, IN 또는 CIN과 달리 AdaIN에는 학습 가능한 아핀 매개 변수가 없습니다. 
-대신 스타일 입력에서 affine 매개 변수를 적응 적으로 계산합니다.
+대신 스타일 입력에서 affine 매개 변수를 계산합니다.
 
 ![adain](https://user-images.githubusercontent.com/8110442/100517490-293fc080-31ce-11eb-9d32-e144d49db7e1.PNG)
 
-여기서 우리는 단순히 σ(y)로 정규화 된 콘텐츠 입력의 크기를 조정하고 µ(y)로 이동합니다. 
-IN과 유사하게 이러한 통계는 여러 공간 위치에서 계산됩니다. 
-직관적으로 특정 스타일의 브러시 스트로크를 감지하는 기능 채널을 고려해 보겠습니다. 
-이러한 종류의 획이있는 스타일 이미지는이 기능에 대해 높은 평균 활성화를 생성합니다. 
+여기서 우리는 단순히 σ(y)로 정규화 된 콘텐츠 입력의 크기를 조정하고 µ(y)로 이동합니다. IN과 유사하게 이러한 통계는 여러 공간 위치에서 계산됩니다. 
+직관적으로 특정 스타일의 브러시 스트로크를 감지하는 기능 채널을 고려해 보겠습니다. 이러한 종류의 획이있는 스타일 이미지는이 기능에 대해 높은 평균 활성화를 생성합니다. 
 AdaIN이 생성 한 출력은 콘텐츠 이미지의 공간 구조를 유지하면서이 기능에 대해 동일한 높은 평균 활성화를 갖습니다. 브러시 스트로크 기능은 [10]과 유사하게 피드 포워드 디코더를 사용하여 이미지 공간으로 반전 될 수 있습니다. 이 기능 채널의 분산은 더 미묘한 스타일 정보를 인코딩 할 수 있으며, 이는 AdaIN 출력 및 최종 출력 이미지로도 전송됩니다.
-
-In short, AdaIN performs style transfer in the feature space by transferring feature statistics, specifically the channel-wise mean and variance. Our AdaIN layer plays a similar role as the style swap layer proposed in [6]. While the style swap operation is very time-consuming and memory-consuming, our AdaIN layer is as simple as an IN layer, adding almost no computational cost. 
 
 간단히 말해 AdaIN은 기능 통계, 특히 채널 별 평균 및 분산을 전송하여 기능 공간에서 스타일 전송을 수행합니다. AdaIN 레이어는 [6]에서 제안한 스타일 스왑 레이어와 유사한 역할을합니다. 스타일 스왑 작업은 시간과 메모리를 많이 소모하지만 AdaIN 레이어는 IN 레이어만큼 간단하여 계산 비용이 거의 추가되지 않습니다.
 
@@ -109,12 +106,7 @@ In short, AdaIN performs style transfer in the feature space by transferring fea
 * c : content image
 * s : style image
 
-랜덤하게 초기화된 decoder g는 map t를 이미지 공간으로 학습된다. 그리고 style이미지를 생성한다. 
-
-디코더는 대부분 인코더를 미러링하며 모든 풀링 레이어는 바둑판 효과를 줄이기 위해 가장 가까운 업 샘플링으로 대체됩니다. 테두리 아티팩트를 피하기 위해 f와 g 모두에 반사 패딩을 사용합니다. 또 다른 중요한 아키텍처 선택은 디코더가 인스턴스, 배치 또는 정규화 레이어를 사용해야하는지 여부입니다. Sec. 4, IN은 각 샘플을 단일 스타일로 정규화하는 반면 BN은 샘플 배치를 단일 스타일을 중심으로 정규화합니다. 디코더가 매우 다른 스타일의 이미지를 생성하도록하려면 둘 다 바람직하지 않습니다. 따라서 디코더에서 정규화 레이어를 사용하지 않습니다. 초. 7.1 우리는 디코더의 IN / BN 레이어가 실제로 성능을 저하시키는 것을 보여줄 것입니다.
-
-The decoder mostly mirrors the encoder, with all pooling layers replaced by nearest up-sampling to reduce checkerboard effects. We use reflection padding in both f and g to avoid border artifacts. Another important architectural choice is whether the decoder should use instance, batch, or no normalization layers. As discussed in Sec. 4, IN normalizes each sample to a single style while BN normalizes a batch of samples to be centered around a single style. Both are undesirable when we want the decoder to generate images in vastly different styles. Thus, we do not use normalization layers in the decoder. In Sec. 7.1 we will show that  IN/BN layers in the decoder indeed hurt performance.
-
+랜덤하게 초기화된 decoder g는 map t를 이미지 공간으로 학습된다. 그리고 style이미지를 생성합니다.
 
 ### 4.2 Training
 이 논문에서는 [6]의 설정에 따라 콘텐츠 이미지로 MS-COCO [36]를 사용하고 WikiArt [39]에서 주로 수집 한 그림 데이터 세트를 스타일 이미지로 사용하여 네트워크를 훈련시켰습니다. 각각의 데이터 셋은 80,000개의 샘플을 학습시켰습니다. adam optimizer, batch-size = 8를 사용했습니다. 
