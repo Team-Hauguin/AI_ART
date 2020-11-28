@@ -101,6 +101,9 @@ In short, AdaIN performs style transfer in the feature space by transferring fea
 위의 style transfer network은 제안된 AdaIN layer를 기반으로 생성되었습니다.  
 이 모델의 앞부분 Encoder는 VGG-19를 통해 미리 학습된 layer인 simple encoder-decoder architecture를 가져왔습니다.
 그 후 content, style이미지를 feature 공간에서 encoding하고 우리는 feature map을 adaIN layer에 의해서 content feature map의 평균과 분산을 style feature map의 그것으로 정렬시키고 target feature map을 만들었습니다. 
+
+![adain3](https://user-images.githubusercontent.com/8110442/100520621-03241b80-31e2-11eb-82f8-0e40075f757d.png)
+
 * T : style transfer network
 * t : target feature maps
 * c : content image
@@ -118,19 +121,22 @@ The decoder mostly mirrors the encoder, with all pooling layers replaced by near
 첫번째로 가로세로비율을 유지하며 짧은 쪽의 이미지사이즈를 512 조정하고, 256 * 256 영역을 랜덤하게 잘랐습니다. 
 네트워크는 fully convolutional이므로 모든 크기의 이미지에 적용할 수 있습니다. 
 
+![adain4](https://user-images.githubusercontent.com/8110442/100520623-06b7a280-31e2-11eb-9fb0-78e4285cd0e5.png)
+
 [51, 11, 52]방식과 유사하게 미리 학습된 VGG19을 사용했고 content loss와 style loss의 조합으로 손실함수를 계산했습니다. 
 content loss는 target feature와 output image와의 유클리드 거리를 사용했습니다. 
 AdaIN layer는 오직 스타일 feature의 평균과 분산을 전달시키므로 style loss는 이 통계량에만 일치합니다. 일반적으로 사용되는 gram matrix가 비슷한 손실을 생성할 수 있지만 개념적으로 더 간결하기 때문에 IN통계와 일치했습니다.(Li et al. [33])
 VGG-19레이어 내부의 각 φi는 style loss를 계산합니다. 이 실험에서는 relu1 1, relu2 1, relu3 1, relu4 1 layers를 동일한 가중치로 사용했습니다. 
 
-[그림]
-
 ## 5. Result
+
+![adain5](https://user-images.githubusercontent.com/8110442/100520624-08816600-31e2-11eb-9539-fd972e2910a6.png)
 
 결과 비교를 위해서 3가지 방식의 style transfer와 비교하였습니다. 
 1. the flexible but slow optimization-based method [16]
 2. the fast feed-forward method restricted to a single style [52]
 3. the flexible patch-based method of medium speed [6]
+
 기타 : default configurations.
 
 **1. Qualitative Examples**  
@@ -145,7 +151,8 @@ VGG-19레이어 내부의 각 φi는 style loss를 계산합니다. 이 실험�
 
 AdaIN 방식은 빠른속도와 유연성 vs 어느정도의 품질(저하) 가 trade-off로 작용하고 있습니다. 그렇다면 품질저하의 정도는 얼마나 될까요? 
 이를 비교하기 위해 최적화를 기반으로하는 [16], fast single-style transfer [52] 와 스타일 손실 측면에서 비교했습니다. 
-[그림6]
+
+![adain6](https://user-images.githubusercontent.com/8110442/100520628-09b29300-31e2-11eb-9a35-0849d7a62822.png)
 
 손실은 [52, 16]과 동일하게 산출되었습니다. 
 AdaIN 방식과 [52]의 방식은 최적화 50~100 반복에서 유사한 스타일 손실을 얻습니다. 이는 AdaIN 방식의 강력한 일반화 능력을 보여줍니다. 또한 스타일 손실은 원본 콘텐츠 이미지보다 훨씬 작습니다. 
