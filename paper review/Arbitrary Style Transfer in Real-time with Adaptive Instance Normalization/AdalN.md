@@ -80,12 +80,17 @@ AdaIN은 콘텐츠 입력 x와 스타일 입력 y를 수신하고 x의 채널 �
 BN, IN 또는 CIN과 달리 AdaIN에는 학습 가능한 아핀 매개 변수가 없습니다. 
 대신 스타일 입력에서 affine 매개 변수를 적응 적으로 계산합니다.
 
+![adain](https://user-images.githubusercontent.com/8110442/100517490-293fc080-31ce-11eb-9d32-e144d49db7e1.PNG)
 
+여기서 우리는 단순히 σ(y)로 정규화 된 콘텐츠 입력의 크기를 조정하고 µ(y)로 이동합니다. 
+IN과 유사하게 이러한 통계는 여러 공간 위치에서 계산됩니다. 
+직관적으로 특정 스타일의 브러시 스트로크를 감지하는 기능 채널을 고려해 보겠습니다. 
+이러한 종류의 획이있는 스타일 이미지는이 기능에 대해 높은 평균 활성화를 생성합니다. 
+AdaIN이 생성 한 출력은 콘텐츠 이미지의 공간 구조를 유지하면서이 기능에 대해 동일한 높은 평균 활성화를 갖습니다. 브러시 스트로크 기능은 [10]과 유사하게 피드 포워드 디코더를 사용하여 이미지 공간으로 반전 될 수 있습니다. 이 기능 채널의 분산은 더 미묘한 스타일 정보를 인코딩 할 수 있으며, 이는 AdaIN 출력 및 최종 출력 이미지로도 전송됩니다.
 
+In short, AdaIN performs style transfer in the feature space by transferring feature statistics, specifically the channel-wise mean and variance. Our AdaIN layer plays a similar role as the style swap layer proposed in [6]. While the style swap operation is very time-consuming and memory-consuming, our AdaIN layer is as simple as an IN layer, adding almost no computational cost. 
 
-
-IN을 약간 변형한 AdaIN을 소개합니다. AdaIN은 단순히 Content input의 평균과 분산을 Style input의 평균과 분산으로 맞추도록 조절합니다.
-실험을 통해서 AdaIN이 효과적으로 병합하는 것을 확인하였습니다. 
+간단히 말해 AdaIN은 기능 통계, 특히 채널 별 평균 및 분산을 전송하여 기능 공간에서 스타일 전송을 수행합니다. AdaIN 레이어는 [6]에서 제안한 스타일 스왑 레이어와 유사한 역할을합니다. 스타일 스왑 작업은 시간과 메모리를 많이 소모하지만 AdaIN 레이어는 IN 레이어만큼 간단하여 계산 비용이 거의 추가되지 않습니다.
 
 
 
