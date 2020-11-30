@@ -29,8 +29,8 @@
 
 ![image](https://user-images.githubusercontent.com/62173633/100561588-a8331700-32fc-11eb-801a-19f8dde6e3ff.png)
 
-![image](https://user-images.githubusercontent.com/62173633/100566356-21386b80-3309-11eb-9351-1f6d645a16a8.png)
-### ![image](https://user-images.githubusercontent.com/62173633/100566365-25fd1f80-3309-11eb-9e06-8a3a38564134.png)
+![image](https://user-images.githubusercontent.com/62173633/100566356-21386b80-3309-11eb-9351-1f6d645a16a8.png) , 
+     ![image](https://user-images.githubusercontent.com/62173633/100566365-25fd1f80-3309-11eb-9e06-8a3a38564134.png)
 
    이 논문에서 가장 말하고자 하는 것은 G와 F Generator를 통해 서로 다른 도메인으로 보내진 데이터가 이전의 데이터로 다시 돌아와야 한다는
    cycle consistency를 설명한다. 즉, 서로 변환을 하는 과정에서 각각의 Generator를 통해 변환 시킨것을 다시 자기 자신과 pixel-wise loss를 
