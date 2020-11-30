@@ -48,6 +48,14 @@
 ### -Network Architecture 
 
 # 4) Results 
+![image](https://user-images.githubusercontent.com/62173633/100568341-572c1e80-330e-11eb-991f-b31f8f659551.png)
+
+![image](https://user-images.githubusercontent.com/62173633/100568362-5e532c80-330e-11eb-8248-b521bc844559.png)
+
+![image](https://user-images.githubusercontent.com/62173633/100568375-64e1a400-330e-11eb-8400-83c5e299a4af.png)
+
+![image](https://user-images.githubusercontent.com/62173633/100568379-68752b00-330e-11eb-8618-2f461cdd2b70.png)
+
 
 ![image](https://user-images.githubusercontent.com/62173633/100192472-60e00b80-2f35-11eb-9c3e-91edddd9b284.png)
 
