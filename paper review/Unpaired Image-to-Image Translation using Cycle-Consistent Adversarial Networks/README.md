@@ -44,10 +44,8 @@
    따라서, 전반적인 틀은 Pix2Pix와 같지만 2개의 Generator, 2개의 Discriminator를 사용해 X,Y 도메인으로 서로 변환이 가능하며 추가적으로 
    Cycle Consistency Loss를 사용한다는 점이 연구의 특징이다. 
 
-# 3) Implementation 
-### -Network Architecture 
 
-# 4) Results 
+# 3) Results 
 ![image](https://user-images.githubusercontent.com/62173633/100568341-572c1e80-330e-11eb-991f-b31f8f659551.png)
 
 ![image](https://user-images.githubusercontent.com/62173633/100568362-5e532c80-330e-11eb-8248-b521bc844559.png)
@@ -56,7 +54,5 @@
 
 ![image](https://user-images.githubusercontent.com/62173633/100568379-68752b00-330e-11eb-8618-2f461cdd2b70.png)
 
-
-![image](https://user-images.githubusercontent.com/62173633/100192472-60e00b80-2f35-11eb-9c3e-91edddd9b284.png)
 
 
