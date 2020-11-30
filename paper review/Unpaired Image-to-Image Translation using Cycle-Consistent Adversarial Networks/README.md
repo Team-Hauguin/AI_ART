@@ -36,6 +36,7 @@
 
 
 ![image](https://user-images.githubusercontent.com/62173633/100561741-06f89080-32fd-11eb-8527-d741cb53c6a4.png)
+
 ![image](https://user-images.githubusercontent.com/62173633/100561747-0b24ae00-32fd-11eb-9d94-1d2554956940.png)
 
    따라서, 전반적인 틀은 Pix2Pix와 같지만 2개의 Generator, 2개의 Discriminator를 사용해 X,Y 도메인으로 서로 변환이 가능하며 추가적으로 
