@@ -18,9 +18,6 @@
 
 ![image](https://user-images.githubusercontent.com/62173633/100561577-a1a49f80-32fc-11eb-9192-5b845a09bc50.png)
 
-![image](https://user-images.githubusercontent.com/62173633/100566356-21386b80-3309-11eb-9351-1f6d645a16a8.png)
-
-
    CycleGAN에서는 2개의 Generator와 2개의 Discriminator를 사용한다. 도메인 X로부터 G라는 Generator를 통해 Y도메인으로 변환하고 또 반대로 
    F라는 Generator를 통해 다시 도메인X로 변환한다. 여기서 존재하는 Dx와 Dy는 각각의 도메인을 위한 Discriminator로서 서로 속이도록 학습하여 
    더 진짜를 만드는 적대적 학습이 이루어진다. 
@@ -32,6 +29,7 @@
 
 ![image](https://user-images.githubusercontent.com/62173633/100561588-a8331700-32fc-11eb-801a-19f8dde6e3ff.png)
 
+![image](https://user-images.githubusercontent.com/62173633/100566356-21386b80-3309-11eb-9351-1f6d645a16a8.png)
 ![image](https://user-images.githubusercontent.com/62173633/100566365-25fd1f80-3309-11eb-9e06-8a3a38564134.png)
 
    이 논문에서 가장 말하고자 하는 것은 G와 F Generator를 통해 서로 다른 도메인으로 보내진 데이터가 이전의 데이터로 다시 돌아와야 한다는
