@@ -16,19 +16,30 @@
 ### -Adversarial Loss 
 ![image](https://user-images.githubusercontent.com/62173633/100192458-5887d080-2f35-11eb-9fd0-53e6b74a4243.png)
 
+![image](https://user-images.githubusercontent.com/62173633/100561577-a1a49f80-32fc-11eb-9192-5b845a09bc50.png)
+
    CycleGAN에서는 2개의 Generator와 2개의 Discriminator를 사용한다. 도메인 X로부터 G라는 Generator를 통해 Y도메인으로 변환하고 또 반대로 
    F라는 Generator를 통해 다시 도메인X로 변환한다. 여기서 존재하는 Dx와 Dy는 각각의 도메인을 위한 Discriminator로서 서로 속이도록 학습하여 
    더 진짜를 만드는 적대적 학습이 이루어진다. 
+   
+ 
     
 ### -Cycle Consistency Loss 
 
 ![image](https://user-images.githubusercontent.com/62173633/100191490-8cfa8d00-2f33-11eb-8be6-fd1fef1210e5.png)
 
+![image](https://user-images.githubusercontent.com/62173633/100561588-a8331700-32fc-11eb-801a-19f8dde6e3ff.png)
+
    이 논문에서 가장 말하고자 하는 것은 G와 F Generator를 통해 서로 다른 도메인으로 보내진 데이터가 이전의 데이터로 다시 돌아와야 한다는
    cycle consistency를 설명한다. 즉, 서로 변환을 하는 과정에서 각각의 Generator를 통해 변환 시킨것을 다시 자기 자신과 pixel-wise loss를 
    걸어주는 것을 Cycle Consistency Loss라고 한다. 
 
-### -Full Objective 
+
+![image](https://user-images.githubusercontent.com/62173633/100561741-06f89080-32fd-11eb-8527-d741cb53c6a4.png)
+![image](https://user-images.githubusercontent.com/62173633/100561747-0b24ae00-32fd-11eb-9d94-1d2554956940.png)
+
+   따라서, 전반적인 틀은 Pix2Pix와 같지만 2개의 Generator, 2개의 Discriminator를 사용해 X,Y 도메인으로 서로 변환이 가능하며 추가적으로 
+   Cycle Consistency Loss를 사용한다는 점이 연구의 특징이다. 
 
 # 3) Implementation 
 ### -Network Architecture 
